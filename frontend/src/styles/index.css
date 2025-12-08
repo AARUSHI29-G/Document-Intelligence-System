@@ -1,0 +1,31 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --accent-blue: #4C8CFF;
+  --accent-purple: #B44CFF;
+}
+
+/* basic page polish */
+body {
+  background: radial-gradient(1200px 600px at 10% 10%, rgba(76,140,255,0.06), transparent 5%),
+              radial-gradient(1000px 500px at 90% 80%, rgba(180,76,255,0.04), transparent 8%),
+              #060616;
+  font-family: Inter, ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+}
+
+/* neon glow button */
+.btn-glow {
+  background: linear-gradient(90deg, var(--accent-purple), var(--accent-blue));
+  box-shadow: 0 8px 40px rgba(180,76,255,0.12);
+  transition: transform .18s ease, box-shadow .18s ease;
+}
+.btn-glow:hover { transform: translateY(-3px); box-shadow: 0 14px 60px rgba(76,140,255,0.18); }
+
+/* glass card */
+.glass {
+  background: rgba(255,255,255,0.03);
+  border: 1px solid rgba(255,255,255,0.06);
+  backdrop-filter: blur(6px);
+}
