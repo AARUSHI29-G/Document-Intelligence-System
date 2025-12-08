@@ -19,7 +19,7 @@ export default function Home() {
     try {
       const res = await axios.post("http://localhost:8000/upload", formData);
 
-      // ✅ Save full document to dashboard history
+      
       const existing = JSON.parse(localStorage.getItem("docs")) || [];
       const newDoc = {
         id: Date.now(),
@@ -28,7 +28,7 @@ export default function Home() {
       };
       localStorage.setItem("docs", JSON.stringify([newDoc, ...existing]));
 
-      // ✅ Go to summary
+      
       navigate("/summary", { state: res.data });
 
     } catch (err) {
@@ -86,7 +86,7 @@ export default function Home() {
             />
           </div>
 
-          {/* ✅ Show selected filename */}
+          {/* Show selected filename */}
           {file && (
             <p className="text-sm text-purple-300 text-center mb-6">
               Selected: {file.name}
