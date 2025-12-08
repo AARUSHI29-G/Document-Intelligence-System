@@ -208,3 +208,5 @@ __marimo__/
 node_modules/ 
 frontend/node_modules/ 
 data/uploads/ 
+backend/data/uploads/
+
