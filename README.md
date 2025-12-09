@@ -37,3 +37,20 @@ Backend:
 cd backend
 pip install -r requirements.txt
 uvicorn main:app --reload
+Frontend:
+
+frontend:
+cd frontend
+npm install
+npm start
+
+## About this project
+This project was created as a practical implementation to understand how document processing works in real-world applications.
+
+Author
+Aarushi
+GitHub: https://github.com/AARUSHI29-G
+
+---
+
+
