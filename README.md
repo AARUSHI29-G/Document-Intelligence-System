@@ -69,3 +69,8 @@ This project was built to understand how document processing systems work in pra
 Aarushi  
 GitHub: https://github.com/AARUSHI29-G
 
+---
+
+Built with ❤️ by Aarushi
+
+
