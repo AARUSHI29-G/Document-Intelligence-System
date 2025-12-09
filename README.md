@@ -1,4 +1,4 @@
-# Document Intelligence System
+# 📄 Document Intelligence System
 
 A simple web application that extracts useful information from documents such as PDFs, scanned images, and text files.
 
@@ -6,30 +6,34 @@ This project focuses on understanding how OCR and basic document analytics work 
 
 ---
 
-## Features
+## ✨ Features
 
-- Text extraction from PDF and image files  
-- Document type classification  
-- Field extraction (emails, phone numbers, IDs, etc.)  
-- Basic AI-based summary  
-- Dashboard to view processed documents  
+- Optical Character Recognition (OCR) for image and PDF documents
+- Intelligent document type detection
+- Automatic text summarization
+- Key field extraction (emails, dates, ID numbers, etc.)
+- Fraud and tampering keyword detection
+- Word count and confidence scoring
+- Clean and modern user interface
 
 ---
 
-## Tech Stack
+## 🛠 Tech Stack
 
 Backend:
-- Python (FastAPI)
+- Python
+- FastAPI
 - Tesseract OCR
 - HuggingFace Transformers
 
 Frontend:
 - React
 - Tailwind CSS
+- Axios
 
 ---
 
-## How to Run the Project
+## ⚡ How to Run the Project
 
 ### Backend
 
@@ -46,25 +50,58 @@ npm start
 
 ---
 
-## Folder Structure
+## 📂 Project Structure
 
 Document-Intelligence-System/
+│
 
 ├── backend/
 
+│ ├── main.py
+
+│ └── data/
+
+│
+
 ├── frontend/
 
-└── README.md
+│ ├── src/
+
+│ └── components/
+
+│
+├── nlp/
+
+├── ocr/
+
+├── utils/
+
+└── assets/
+
+---
+## 📸 Project Screenshots
+
+### 🏠 Home Page
+![Home Page](assets/screenshots/home%20page%20(2).png)
+
+### ⬆️ Upload Page
+![Upload Page](assets/screenshots/upload%20page.png)
+
+### 📊 Dashboard
+![Dashboard](assets/screenshots/dashboard%20page.png)
+
+### 📄 Result Page
+![Result Page](assets/screenshots/result%20page.png)
 
 ---
 
-## About This Project
+## 🎯 About This Project
 
-This project was built to understand how document processing systems work in practical applications.
+This project was built as a hands-on implementation to understand real-world document intelligence systems and how AI can be used to automate document analysis.
 
 ---
 
-## Author
+## 👩‍💻 Author
 
 Aarushi  
 GitHub: https://github.com/AARUSHI29-G
