@@ -49,8 +49,11 @@ npm start
 ## Folder Structure
 
 Document-Intelligence-System/
+
 ├── backend/
+
 ├── frontend/
+
 └── README.md
 
 ---
