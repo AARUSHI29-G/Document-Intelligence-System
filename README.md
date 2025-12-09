@@ -1,27 +1,27 @@
 # Document Intelligence System
 
-A web-based system that helps extract useful information from documents like PDFs, images and scans.
+A simple web application that extracts useful information from documents such as PDFs, scanned images, and text files.
 
-This project was built to experiment with OCR and basic NLP techniques for real-world document processing.
-
----
-
-## What it does
-
-- Reads text from images and PDFs
-- Classifies document type
-- Extracts useful fields like emails, phone numbers and IDs
-- Generates a short summary of the document
-- Saves processed documents in a simple dashboard
+This project focuses on understanding how OCR and basic document analytics work in real-world scenarios.
 
 ---
 
-## Tech Used
+## Features
+
+- Text extraction from PDF and image files  
+- Document type classification  
+- Field extraction (emails, phone numbers, IDs, etc.)  
+- Basic AI-based summary  
+- Dashboard to view processed documents  
+
+---
+
+## Tech Stack
 
 Backend:
-- FastAPI (Python)
+- Python (FastAPI)
 - Tesseract OCR
-- Transformers (HuggingFace)
+- HuggingFace Transformers
 
 Frontend:
 - React
@@ -29,28 +29,40 @@ Frontend:
 
 ---
 
-## How to Run
+## How to Run the Project
 
-Backend:
+### Backend
 
-```bash
 cd backend
 pip install -r requirements.txt
 uvicorn main:app --reload
-Frontend:
 
-frontend:
+
+### Frontend
+
 cd frontend
 npm install
 npm start
 
-## About this project
-This project was created as a practical implementation to understand how document processing works in real-world applications.
+---
 
-Author
-Aarushi
-GitHub: https://github.com/AARUSHI29-G
+## Folder Structure
+
+Document-Intelligence-System/
+├── backend/
+├── frontend/
+└── README.md
 
 ---
 
+## About This Project
+
+This project was built to understand how document processing systems work in practical applications.
+
+---
+
+## Author
+
+Aarushi  
+GitHub: https://github.com/AARUSHI29-G
 
