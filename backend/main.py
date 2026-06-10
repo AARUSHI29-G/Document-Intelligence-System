@@ -1,3 +1,4 @@
+
 from fastapi import FastAPI, UploadFile, File, HTTPException, Request
 from fastapi.middleware.cors import CORSMiddleware
 from dotenv import load_dotenv
@@ -49,28 +50,56 @@ async def save_file(file: UploadFile):
     return path, file_id, filename
 
 # --------- EXTRACTORS -----------
-def extract_image(path):
+def extract_text_from_image(path):
     img = Image.open(path).convert("L")
-    return pytesseract.image_to_string(img)
+    text = pytesseract.image_to_string(img)
+
+    print("\n========== OCR OUTPUT ==========")
+    print(text)
+    print("================================\n")
+
+    return text
+
+
+def extract_text_from_pil_image(pil_img):
+    img = pil_img.convert("L")
+    text = pytesseract.image_to_string(img)
+
+    print("\n========== OCR OUTPUT ==========")
+    print(text)
+    print("================================\n")
+
+    return text
+def extract_image(path):
+    return extract_text_from_image(path)
 
 def extract_pdf(path):
     text = ""
+
     try:
-        pages = convert_from_path(path, dpi=200, poppler_path=POPPLER_PATH)
+        pages = convert_from_path(path, dpi=300, poppler_path=POPPLER_PATH)
+
         for p in pages:
-            text += pytesseract.image_to_string(p) + "\n"
+            text += extract_text_from_pil_image(p) + "\n"
+
         return text
-    except:
-        pass
+
+    except Exception as e:
+        print("PDF OCR failed:", e)
 
     try:
         import PyPDF2
+
         with open(path, "rb") as f:
             reader = PyPDF2.PdfReader(f)
+
             for page in reader.pages:
                 text += page.extract_text() or ""
+
         return text
-    except:
+
+    except Exception as e:
+        print("PyPDF2 extraction failed:", e)
         return ""
 
 def extract_docx(path):
@@ -111,7 +140,19 @@ def extract_txt(path):
 
 # --------- CLEAN TEXT ----------
 def clean_text(text):
-    return " ".join(text.split())
+    if not text:
+        return ""
+
+    # weird unicode chars remove
+    text = re.sub(r"[^\w\s.,:/&()\-']", " ", text)
+
+    # multiple spaces
+    text = re.sub(r"\s+", " ", text)
+
+    # multiple newlines
+    text = re.sub(r"\n+", "\n", text)
+
+    return text.strip()
 
 # --------- CLASSIFIER ----------
 def classify(text):
@@ -143,34 +184,31 @@ def filter_fields(fields):
     return {k: v for k, v in fields.items() if v}
 
 # --------- YOUR ORIGINAL SUMMARIZER ---------
-summarizer = pipeline("summarization", model="facebook/bart-large-cnn")
-
 def ai_summary(text, doc_type):
     text = text.strip()
-    if len(text) < 60:
+
+    if len(text) < 30:
         return "Not enough content to generate meaningful summary."
+
+    clean = re.sub(r"[¢@]+", "", text)
+    clean = re.sub(r"\s+", " ", clean).strip()
 
     try:
         ai = summarizer(
-            text[:2500],
-            max_length=160,
-            min_length=60,
+            clean[:2500],
+            max_length=120,
+            min_length=40,
             do_sample=False
-        )[0]['summary_text']
+        )[0]["summary_text"]
     except:
-        ai = "AI was unable to generate a clean summary."
+        ai = clean[:700]
 
-    purpose_map = {
-        "aadhaar_card": "This document is an Aadhaar identity document.",
-        "pan_card": "This document is a PAN identification document.",
-        "resume": "This document is a professional resume.",
-        "invoice": "This document is a financial invoice or bill.",
-        "certificate": "This document is a certification document."
-    }
+    return f"""
+Document Type: {doc_type}
 
-    purpose = purpose_map.get(doc_type, "This document contains general information.")
-
-    return f"{purpose}\n\nKey Summary:\n{ai}"
+Summary:
+{ai}
+""".strip()
 
 # --------- SAFE EXTRA FEATURES -----
 def confidence_score(doc_type, fields):

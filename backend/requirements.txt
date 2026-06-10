@@ -1,10 +1,10 @@
-fastapi
-uvicorn
-python-multipart
+flask
 pytesseract
-pillow
 opencv-python
 numpy
+pillow
+spacy
+transformers
+python-docx
 pdf2image
-pydantic
-python-dotenv
+pymupdf
